@@ -1,0 +1,178 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cassu - Débito</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #2b2e31;
+            font-family: "Cormorant Garamond", serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            padding-top: 40px;
+        }
+
+        /* LOGO */
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-circle img {
+            width: 150px;
+            height: auto;
+        }
+
+        .logo-text {
+            font-size: 46px;
+            margin-top: -8px;
+        }
+
+        /* TARJETA */
+        .page-card {
+            margin-top: 25px;
+            background-color: #1f2226;
+            padding: 30px 35px;
+            border-radius: 18px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.45);
+        }
+
+        .page-card h1 {
+            font-size: 32px;
+            margin-top: 0;
+        }
+
+        .page-card p {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        /* INPUT MAIL */
+        #email {
+            width: 90%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        /* BOTÓN */
+        .btn-enviar {
+            padding: 12px 20px;
+            border-radius: 999px;
+            border: none;
+            background-color: #0f5ea8;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        .btn-enviar:hover {
+            background-color: #093d6b;
+        }
+
+        .btn-menu {
+            display: inline-block;
+            color: #e8c15c;
+            font-size: 1.1rem;
+            margin-top: 15px;
+            text-decoration: none;
+        }
+
+        .btn-menu:hover {
+            text-decoration: underline;
+        }
+
+        /* CONTENEDOR QR */
+        #qr-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #qr-container p {
+            font-size: 14px;
+            color: #f0b10b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- LOGO -->
+    <div class="logo-container">
+        <div class="logo-circle">
+            <img src="{% static 'img/logo_cassu.png' %}" alt="Logo Cassu">
+        </div>
+        <div class="logo-text">cassu</div>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div class="page-card">
+        <h1>Débito</h1>
+
+        <p>
+            Dejanos tu e-mail y generamos un código QR para escribirnos por WhatsApp.<br>
+            Al escanearlo, se abre un chat con el mensaje prearmado.
+        </p>
+
+        <!-- CAMPO PARA ESCRIBIR EL MAIL -->
+        <input type="email" id="email" placeholder="Escribí tu e-mail" required>
+
+        <!-- BOTÓN PARA GENERAR EL QR -->
+        <br>
+        <button class="btn-enviar" type="button" onclick="generarQR()">
+            Generar QR de WhatsApp
+        </button>
+
+        <!-- DONDE SE DIBUJA EL QR -->
+        <div id="qr-container"></div>
+
+        <!-- VOLVER -->
+        <a href="{% url 'home:index' %}" class="btn-menu">← Volver al menú</a>
+    </div>
+
+    <!-- LIBRERÍA PARA GENERAR QR -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        function generarQR() {
+            const email = document.getElementById('email').value.trim();
+            const qrDiv = document.getElementById('qr-container');
+
+            qrDiv.innerHTML = ''; // limpio por si ya había uno
+
+            if (!email) {
+                qrDiv.innerHTML = '<p>Por favor, escribí un mail primero.</p>';
+                return;
+            }
+
+            // Número de WhatsApp (Argentina) en formato internacional sin +
+            const numero = "5491131168605"; // +54 9 11 3116 8605
+
+            const mensaje = "Mi email es " + email;
+            const url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensaje);
+
+            new QRCode(qrDiv, {
+                text: url,
+                width: 200,
+                height: 200
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crédito - Cassu</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #030000;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card {
+            background-color: #111;
+            padding: 30px;
+            border-radius: 12px;
+            width: 420px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.6);
+        }
+        h1 { margin-top: 0; text-align: center; }
+        label { display: block; margin-top: 12px; }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border-radius: 6px;
+            border: none;
+        }
+        .btn {
+            margin-top: 18px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            background-color: #004080;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover { background-color: #0066cc; }
+        .back {
+            margin-top: 15px;
+            display: block;
+            text-align: center;
+            color: #ccc;
+            text-decoration: none;
+        }
+        .back:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Crédito</h1>
+    <p>Simulá un pago con tarjeta de crédito.</p>
+
+    <form>
+        <label>Número de tarjeta
+            <input type="text" placeholder="XXXX XXXX XXXX XXXX">
+        </label>
+
+        <label>Nombre en la tarjeta
+            <input type="text" placeholder="Nombre y apellido">
+        </label>
+
+        <label>Vencimiento
+            <input type="text" placeholder="MM/AA">
+        </label>
+
+        <label>Cuotas
+            <select>
+                <option value="1">1 cuota</option>
+                <option value="3">3 cuotas</option>
+                <option value="6">6 cuotas</option>
+                <option value="12">12 cuotas</option>
+            </select>
+        </label>
+
+        <button type="submit" class="btn">Confirmar crédito</button>
+    </form>
+
+    <a href="{% url 'index' %}" class="back">⬅ Volver al menú</a>
+</div>
+</body>
+</html>
+

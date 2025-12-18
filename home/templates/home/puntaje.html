@@ -1,0 +1,18 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block header %}
+  <div class="header">
+    <img src="{% static 'img/logo_cassu.png' %}" alt="Cassu">
+    <div class="brand">cassu</div>
+  </div>
+{% endblock %}
+
+{% block contenido %}
+  <h1>Puntaje</h1>
+  <p class="subtitle">Tus premios y beneficios</p>
+
+  <a class="btn" href="{% url 'home:index' %}">Volver al inicio</a>
+{% endblock %}
+
+

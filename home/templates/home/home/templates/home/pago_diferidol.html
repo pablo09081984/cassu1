@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cassu - Billeteras Virtuales</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #2b2e31;
+            font-family: "Cormorant Garamond", serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            padding-top: 40px;
+        }
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <h1>Pago Diferido</h1>
+
+        <!-- Formulario de pago -->
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Generar QR</button>
+        </form>
+
+        {% if ok %}
+        <h2>QR generado</h2>
+        <img src="data:image/png;base64,{{ qr_b64 }}" alt="QR de pago" style="width:260px;height:260px;">
+        <p style="opacity:.8; font-size:0.9rem;">{{ data_text }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title> - Asociarme como comensal</title>
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #2b2e31;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        .logo-container {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-circle img {
+            width: 160px;
+            height: auto;
+            display: block;
+        }
+
+        .logo-text {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 48px;
+            font-weight: 600;
+            color: white;
+            margin-top: -5px;
+            text-align: center;
+        }
+
+        .page-card {
+            margin-top: 30px;
+            background-color: #1f2226;
+            padding: 30px 40px;
+            border-radius: 18px;
+            max-width: 700px;
+            width: 95%;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
+
+        .page-card h1 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .page-card p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* FORMULARIO */
+        form {
+            margin-top: 10px;
+        }
+
+        .form-row {
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-row label {
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+
+        .form-input {
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: none;
+            font-size: 14px;
+        }
+
+        .form-row-inline {
+            display: flex;
+            gap: 12px;
+        }
+
+        .form-row-inline .form-row {
+            flex: 1;
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .form-footer {
+            margin-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: none;
+            background-color: #0f5ea8;
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-primary:hover {
+            background-color: #093d6b;
+        }
+
+        .btn-link {
+            text-decoration: none;
+            color: #f0b10b;
+            font-size: 14px;
+        }
+
+        .btn-link:hover {
+            text-decoration: underline;
+        }
+
+        .acepto {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOGO -->
+    <div class="logo-container">
+        <div class="logo-circle">
+            <img src="{% static 'img/logo_cassu.png' %}" alt="Logo Cassu">
+        </div>
+        <div class="logo-text"></div>
+    </div>
+
+    <!-- PLANILLA DE DATOS PERSONALES -->
+    <div class="page-card">
+        <h1>Asociarme como comensal</h1>
+        <p>Completá tus datos personales para enviar la solicitud de alta como comensal.</p>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-row-inline">
+                <div class="form-row">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" class="form-input" required>
+                </div>
+                <div class="form-row">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" id="apellido" name="apellido" class="form-input" required>
+                </div>
+            </div>
+
+            <div class="form-row-inline">
+                <div class="form-row">
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" name="dni" class="form-input" required>

@@ -1,0 +1,67 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block title %}Cassu{% endblock %}
+
+{% block contenido %}
+
+  <style>
+    
+    /* remolino / vortex */
+    .logo-circle::before{
+      content:"";
+      position:absolute;
+      inset:-22px;
+      border-radius:999px;
+      background:
+        conic-gradient(from 0deg,
+          rgba(0,255,200,.25),
+          rgba(0,140,255,.20),
+          rgba(214, 53, 53, 0.08),
+          rgba(0,255,200,.25)
+        );
+      filter: blur(10px);
+      opacity:.9;
+      animation: vortex 1.25s linear infinite;
+      z-index:0;
+
+    .hero img{
+      width: clamp(120px, 48vw, 240px);
+      height:auto;
+      display:block;
+      margin: 6px auto 0;
+      animation: floaty 2.8s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .brand{
+      font-family:"Cormorant Garamond", serif;
+      font-size: clamp(34px, 10vw, 64px);
+      font-weight:600;
+      margin-top: -6px;
+      letter-spacing:.3px;
+    }
+
+    @keyframes floaty{
+      0%,100%{ transform: translateY(0px) scale(1); }
+      50%{ transform: translateY(-6px) scale(1.01); }
+    }
+    @keyframes fadeIn{
+      from{ opacity:0; transform: translateY(6px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+  </style>
+
+  <div class="hero">
+    <img src="{% static 'img/logo_cassu.png' %}" alt="Cassu">
+    <div class="brand"></div>
+  </div>
+
+  <div class="btn" onclick="location.href='{% url 'home:pago_diferido' %}'">1 · Pago diferido</div>
+  <div class="btn" onclick="location.href='{% url 'home:pago_programado' %}'">2 · Pago programado</div>
+  <div class="btn" onclick="location.href='{% url 'home:debito' %}'">3 · Débito</div>
+  <div class="btn" onclick="location.href='{% url 'home:credito' %}'">4 · Crédito</div>
+  <div class="btn" onclick="location.href='{% url 'home:suscripcion' %}'">5 · Asociarme como comensal</div>
+  <div class="btn" onclick="location.href='{% url 'home:puntaje' %}'">6 · Puntaje (premios)</div>
+
+{% endblock %}

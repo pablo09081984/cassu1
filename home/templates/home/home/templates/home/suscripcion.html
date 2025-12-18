@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Suscripción de comensal - Cassu</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #030000;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .card {
+            background-color: #111;
+            padding: 30px;
+            border-radius: 12px;
+            width: 480px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.6);
+        }
+        h1 { margin-top: 0; text-align: center; }
+        label { display: block; margin-top: 10px; }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border-radius: 6px;
+            border: none;
+        }
+        textarea { resize: vertical; }
+        .btn {
+            margin-top: 18px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            background-color: #008066;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover { background-color: #00a37f; }
+        .back {
+            margin-top: 15px;
+            display: block;
+            text-align: center;
+            color: #ccc;
+            text-decoration: none;
+        }
+        .back:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <h1>Asociarme como comensal</h1>
+    <p>Completá tus datos para suscribirte a Cassu.</p>
+
+    <form>
+        <label>Nombre
+            <input type="text" name="nombre" placeholder="Nombre">
+        </label>
+
+        <label>Apellido
+            <input type="text" name="apellido" placeholder="Apellido">
+        </label>
+
+        <label>DNI
+            <input type="text" name="dni" placeholder="Número de documento">
+        </label>
+
+        <label>Email
+            <input type="email" name="email" placeholder="correo@ejemplo.com">
+        </label>
+
+        <label>Teléfono
+            <input type="text" name="telefono" placeholder="Ej: 11-1234-5678">
+        </label>
+
+        <label>Tipo de plan
+            <select name="plan">
+                <option value="diario">Diario</option>
+                <option value="semanal">Semanal</option>
+                <option value="mensual">Mensual</option>
+            </select>
+        </label>
+
+        <label>Comentarios adicionales
+            <textarea name="comentarios" rows="3"
+                      placeholder="Alergias, preferencias, etc."></textarea>
+        </label>
+
+        <button type="submit" class="btn">Enviar solicitud</button>
+    </form>
+
+    <a href="{% url 'index' %}" class="back">⬅ Volver al menú</a>
+</div>
+</body>
+</html>

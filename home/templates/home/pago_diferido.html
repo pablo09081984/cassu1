@@ -1,0 +1,316 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cassu - Pago diferido</title>
+
+  <style>
+    body{
+      margin:0;
+      min-height:100vh;
+      background-color:#2b2e31;
+      font-family: Arial, sans-serif;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      color:white;
+      padding-top:40px;
+    }
+
+    /* ===== Logo remolino (mismos colores, animación remolino) ===== */
+    .logo-container{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      animation: fadeIn .35s ease both;
+    }
+
+    .logo-circle{
+      width:160px;
+      position:relative;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      margin-bottom:6px;
+    }
+
+    /* remolino / vortex */
+    .logo-circle::before{
+      content:"";
+      position:absolute;
+      inset:-22px;
+      border-radius:999px;
+      background:
+        conic-gradient(from 0deg,
+          rgba(0,255,200,.25),
+          rgba(0,140,255,.20),
+          rgba(255,255,255,.08),
+          rgba(0,255,200,.25)
+        );
+      filter: blur(10px);
+      opacity:.9;
+      animation: vortex 1.25s linear infinite;
+      z-index:0;
+    }
+
+    /* segundo halo para “profundidad” */
+    .logo-circle::after{
+      content:"";
+      position:absolute;
+      inset:-12px;
+      border-radius:999px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(0,255,200,.18), transparent 58%),
+        radial-gradient(circle at 70% 70%, rgba(0,140,255,.16), transparent 58%);
+      filter: blur(10px);
+      opacity:.85;
+      animation: pulse 2.4s ease-in-out infinite;
+      z-index:0;
+    }
+
+    .logo-circle img{
+      width:160px;
+      height:auto;
+      display:block;
+      position:relative;
+      z-index:1;
+      filter: drop-shadow(0 18px 25px rgba(0,0,0,.40));
+      animation: floaty 2.8s ease-in-out infinite;
+      transform-origin:center;
+    }
+
+    .logo-text{
+      font-family:"Cormorant Garamond", serif;
+      font-size:48px;
+      font-weight:600;
+      color:white;
+      margin-top:-5px;
+      text-align:center;
+      animation: fadeUp .55s ease both;
+      animation-delay:.10s;
+    }
+
+    /* ===== Card y botones (igual a tu estilo) ===== */
+    .page-card{
+      margin-top:30px;
+      background-color:#1f2226;
+      padding:30px 40px;
+      border-radius:18px;
+      max-width:600px;
+      width:90%;
+      text-align:center;
+      box-shadow:0 0 20px rgba(0,0,0,0.4);
+      animation: fadeIn .35s ease both;
+    }
+
+    .page-card h1{
+      margin-top:0;
+      margin-bottom:10px;
+      font-size:30px;
+    }
+
+    .page-card p{
+      margin-bottom:15px;
+      opacity:.92;
+    }
+
+    .field{
+      margin: 12px 0;
+      text-align:left;
+    }
+    label{
+      display:block;
+      font-size:14px;
+      opacity:.9;
+      margin-bottom:6px;
+    }
+    input, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:10px;
+      border:none;
+      outline:none;
+      font-size:16px;
+    }
+
+    .row{
+      display:flex;
+      gap:12px;
+      margin-top:10px;
+    }
+    .row > *{ flex:1; }
+
+    .btn{
+      margin-top:12px;
+      display:block;
+      width:100%;
+      padding:12px 18px;
+      border-radius:999px;
+      background-color:#0f5ea8;
+      color:#ffffff;
+      text-decoration:none;
+      font-weight:bold;
+      border:none;
+      cursor:pointer;
+      transition: filter .15s ease, transform .15s ease;
+      font-size:16px;
+    }
+    .btn:hover{
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary{
+      background-color: rgba(255,255,255,.10);
+      font-weight:600;
+    }
+
+    .wallets{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width:520px){
+      .wallets{ grid-template-columns: 1fr; }
+    }
+
+    .small{
+      margin-top:12px;
+      font-size:13px;
+      opacity:.80;
+      line-height:1.4;
+      text-align:left;
+    }
+
+    @keyframes vortex{
+      from{ transform: rotate(0deg); }
+      to{ transform: rotate(360deg); }
+    }
+    @keyframes pulse{
+      0%,100%{ transform: scale(1); opacity:.78; }
+      50%{ transform: scale(1.05); opacity:.95; }
+    }
+    @keyframes floaty{
+      0%,100%{ transform: translateY(0px) scale(1); }
+      50%{ transform: translateY(-6px) scale(1.01); }
+    }
+    @keyframes fadeIn{
+      from{ opacity:0; transform: translateY(10px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+    @keyframes fadeUp{
+      from{ opacity:0; transform: translateY(10px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOGO remolino -->
+  <div class="logo-container">
+    <div class="logo-circle">
+      <img src="{% static 'img/logo_cassu.png' %}" alt="Logo Cassu">
+    </div>
+    <div class="logo-text">cassu</div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="page-card">
+    <h1>Pago Diferido</h1>
+    <p>Completá los datos y elegí con qué billetera querés pagar.</p>
+
+    <div class="row">
+      <div class="field">
+        <label for="monto">Monto</label>
+        <input id="monto" type="number" min="1" step="0.01" placeholder="Ej: 15000">
+      </div>
+      <div class="field">
+        <label for="ref">Referencia</label>
+        <input id="ref" type="text" maxlength="60" placeholder="Ej: Mes de enero">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="email">Email (para recibir comprobante)</label>
+      <input id="email" type="email" placeholder="tucorreo@ejemplo.com">
+    </div>
+
+    <div class="wallets">
+      <button class="btn" type="button" onclick="redirigir('mercadopago')">Mercado Pago</button>
+      <button class="btn" type="button" onclick="redirigir('modo')">MODO</button>
+      <button class="btn" type="button" onclick="redirigir('uala')">Ualá</button>
+      <button class="btn" type="button" onclick="redirigir('personalpay')">Personal Pay</button>
+      <button class="btn btn-secondary" type="button" onclick="copiarDatos()">Copiar datos</button>
+      <a class="btn btn-secondary" href="{% url 'home:index' %}">← Volver al menú</a>
+    </div>
+
+    <div class="small" id="hint">
+      * Esto es una redirección por link (demo). Para cobro real, se genera un “checkout/preferencia” en backend y se redirige al link oficial de pago.
+    </div>
+  </div>
+
+  <script>
+    function getData(){
+      const monto = (document.getElementById("monto").value || "").trim();
+      const ref = (document.getElementById("ref").value || "").trim();
+      const email = (document.getElementById("email").value || "").trim();
+
+      if(!monto || Number(monto) <= 0){
+        alert("Por favor ingresá un monto válido.");
+        return null;
+      }
+
+      return { monto, ref: ref || "Cassu", email };
+    }
+
+    // Armamos un "payload" simple (demo) para pasar por querystring
+    function buildQS(data){
+      const qs = new URLSearchParams();
+      qs.set("monto", data.monto);
+      qs.set("ref", data.ref);
+      if(data.email) qs.set("email", data.email);
+      return qs.toString();
+    }
+
+    function redirigir(billetera){
+      const data = getData();
+      if(!data) return;
+
+      const qs = buildQS(data);
+
+      // ⚠️ Links demo: cambialos por tus links reales / checkout real.
+      // Idea: en producción, tu backend genera un link de pago oficial por billetera
+      // y te lo devuelve para redireccionar.
+      const links = {
+        mercadopago: "https://www.mercadopago.com.ar/",   // demo
+        modo:        "https://www.modo.com.ar/",          // demo
+        uala:        "https://www.uala.com.ar/",          // demo
+        personalpay: "https://www.personalpay.com.ar/"    // demo
+      };
+
+      const base = links[billetera];
+      const url = base + (base.includes("?") ? "&" : "?") + qs;
+
+      // Redirección
+      window.location.href = url;
+    }
+
+    async function copiarDatos(){
+      const data = getData();
+      if(!data) return;
+
+      const text = `CASSU | Monto: ${data.monto} | Ref: ${data.ref}` + (data.email ? ` | Email: ${data.email}` : "");
+      try{
+        await navigator.clipboard.writeText(text);
+        alert("Datos copiados para pegar en tu billetera:\n\n" + text);
+      }catch(e){
+        alert("No pude copiar automáticamente. Copiá esto:\n\n" + text);
+      }
+    }
+  </script>
+
+</body>
+</html>
