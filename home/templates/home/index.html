@@ -1,29 +1,17 @@
 {% extends "home/base.html" %}
 {% load static %}
+{% include "home/_logo_animado.html" %}   
 
 {% block title %}Cassu{% endblock %}
 
 {% block contenido %}
 
   <style>
-    
-    /* remolino / vortex */
-    .logo-circle::before{
-      content:"";
-      position:absolute;
-      inset:-22px;
-      border-radius:999px;
-      background:
-        conic-gradient(from 0deg,
-          rgba(0,255,200,.25),
-          rgba(0,140,255,.20),
-          rgba(214, 53, 53, 0.08),
-          rgba(0,255,200,.25)
-        );
-      filter: blur(10px);
-      opacity:.9;
-      animation: vortex 1.25s linear infinite;
-      z-index:0;
+    .hero{
+      text-align:center;
+      margin-bottom: 12px;
+      animation: fadeIn .30s ease both;
+    }
 
     .hero img{
       width: clamp(120px, 48vw, 240px);
