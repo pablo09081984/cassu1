@@ -1,4 +1,9 @@
+import os
 from pathlib import Path
+
+DEBUG = os.environ.get("DEBUG", "False") == "True"
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".onrender.com"]
 
 BASE_DIR = Path(__file__).resolve().parent.parent  # CASSU\
 
